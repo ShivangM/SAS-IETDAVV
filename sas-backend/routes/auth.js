@@ -27,7 +27,7 @@ const sendVerificationMail = (sendTo, verificationToken) => {
     to: sendTo,
     subject: 'Verify your SAS-IETDAVV Account',
     text: `Thank you for signup to SAS-IETDAVV please click the link to verifiy your account:
-    ${process.env.REACT_APP_BACKEND_ENDPOINT}/api/auth/verify/${verificationToken}
+    ${process.env.BACKEND_ENDPOINT}/api/auth/verify/${verificationToken}
     
     Please ignore this email if this was not attemted by you.`,
   };
