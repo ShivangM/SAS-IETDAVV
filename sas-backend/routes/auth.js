@@ -179,8 +179,7 @@ router.post(
       const authToken = jwt.sign(data, process.env.JWT_SECRET);
       res.status(200).json({ authToken });
     } catch (error) {
-      console.error(error.message);
-      res.status(500).send('Some Error occured');
+      res.status(500).send(error.message);
     }
   }
 );
