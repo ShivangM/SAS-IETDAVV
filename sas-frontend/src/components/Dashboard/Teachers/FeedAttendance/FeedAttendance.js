@@ -7,23 +7,43 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadingActions } from '../../../../store/loadingSlice';
 import { filterDataActions } from '../../../../store/filterDataSlice';
+import { subjectActions } from '../../../../store/subjectSlice';
 
 function FeedAttendance() {
   const [value, onChange] = useState(new Date());
   const [teaches, setTeaches] = useState({});
 
-  const attendanceData = useSelector((state) => state.attendance.classStudents);
-  const subject = useSelector((state) => state.subject.classSubject);
+  const attendanceData = useSelector(
+    (state) => state?.attendance?.classStudents
+  );
+
+  const subject = useSelector((state) => state?.subject?.classSubject);
 
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    const url = 'http://localhost:5000/api/data/getteaches';
+    const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getteaches`;
     dispatch(loadingActions.setLoading({ loading: true, msg: 'Loading...' }));
     const temp = await axios.post(url).catch((err) => alert(err));
     setTeaches(temp.data);
     dispatch(filterDataActions.setFilterData(temp.data[0]));
     dispatch(loadingActions.setLoading({ loading: false, msg: 'loading' }));
+  }, []);
+
+  useEffect(() => {
+    const getattendance = async () => {
+      const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getsubjects`;
+      dispatch(
+        loadingActions.setLoading({ loading: true, msg: 'Loading Attendance' })
+      );
+      const subjectsData = await axios.post(url).catch((err) => alert(err));
+      dispatch(
+        loadingActions.setLoading({ loading: false, msg: 'Loading Attendance' })
+      );
+      dispatch(subjectActions.setSubjectData(subjectsData.data));
+    };
+
+    getattendance();
   }, []);
 
   const date = `${value.getFullYear()}-${
@@ -48,19 +68,19 @@ function FeedAttendance() {
               <div className={rowClass}>
                 <span>Subject Code: </span>
                 <span className="text-sm font-normal">
-                  {subject.subject_code}
+                  {subject?.subject_code}
                 </span>
               </div>
               <div className={rowClass}>
                 <span>Subject Name</span>
                 <span className="text-sm font-normal">
-                  {subject.subject_name}
+                  {subject?.subject_name}
                 </span>
               </div>
               <div className={rowClass}>
                 <span>Class Strength: </span>
                 <span className="text-sm font-normal">
-                  {attendanceData.length}
+                  {attendanceData?.length}
                 </span>
               </div>
             </div>

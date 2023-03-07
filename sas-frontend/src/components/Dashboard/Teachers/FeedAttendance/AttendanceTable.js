@@ -23,12 +23,13 @@ function AttendanceTable(props) {
   const subject = useSelector((state) => state.subject.classSubject);
 
   useEffect(async () => {
-    const url = 'http://localhost:5000/api/data/getclassstudents';
+    const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getclassstudents`;
     dispatch(
       loadingActions.setLoading({ loading: true, msg: 'Loading Attendance' })
     );
 
     const temp = await axios.post(url, filterData).catch((err) => alert(err));
+    console.log(temp);
     dispatch(subjectActions.setClassSubject(temp.data.subject[0]));
     dispatch(attendaceActions.setClassStudents(temp.data.students));
 
@@ -61,7 +62,7 @@ function AttendanceTable(props) {
         {
           label: 'Yes',
           onClick: async () => {
-            const url = 'http://localhost:5000/api/data/feedattendance';
+            const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/feedattendance`;
             dispatch(
               loadingActions.setLoading({
                 loading: true,

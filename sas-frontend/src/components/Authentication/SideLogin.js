@@ -21,17 +21,20 @@ function SideLogin() {
     dispatch(
       loadingActions.setLoading({ loading: true, msg: 'Authenticating...' })
     );
-    const response = await fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: credentials.email,
-        password: credentials.password,
-        type: type,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/auth/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: credentials.email,
+          password: credentials.password,
+          type: type,
+        }),
+      }
+    );
 
     const json = await response.json();
 

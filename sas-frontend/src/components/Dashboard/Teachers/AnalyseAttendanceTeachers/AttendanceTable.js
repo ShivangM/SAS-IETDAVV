@@ -23,7 +23,7 @@ function AttendanceTable(props) {
   const filterData = useSelector((state) => state.filterData.data);
 
   useEffect(async () => {
-    const url = 'http://localhost:5000/api/data/getattendanceondate';
+    const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getattendanceondate`;
     dispatch(
       loadingActions.setLoading({ loading: true, msg: 'Loading Attendance' })
     );

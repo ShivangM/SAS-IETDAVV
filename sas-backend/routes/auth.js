@@ -27,7 +27,7 @@ const sendVerificationMail = (sendTo, verificationToken) => {
     to: sendTo,
     subject: 'Verify your SAS-IETDAVV Account',
     text: `Thank you for signup to SAS-IETDAVV please click the link to verifiy your account:
-    http://localhost:5000/api/auth/verify/${verificationToken}
+    ${process.env.REACT_APP_BACKEND_ENDPOINT}/api/auth/verify/${verificationToken}
     
     Please ignore this email if this was not attemted by you.`,
   };
@@ -57,7 +57,7 @@ router.get('/verify/:token', (req, res) => {
       db.query(
         `INSERT INTO user_auth VALUES('${userData.email}','${userData.secPassword}')`
       );
-      res.redirect(`http://localhost:3000/login`);
+      res.redirect(`/login`);
     }
   });
 });

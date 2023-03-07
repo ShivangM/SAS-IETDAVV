@@ -15,7 +15,7 @@ function AccountSettings() {
 
     if (newPassword === confirmNewPassword && newPassword.length > 4) {
       const response = await fetch(
-        `http://localhost:5000/api/auth/changepassword`,
+        `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/auth/changepassword`,
         {
           method: 'POST',
           headers: {

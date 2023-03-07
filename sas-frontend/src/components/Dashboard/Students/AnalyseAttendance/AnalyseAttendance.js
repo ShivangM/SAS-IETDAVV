@@ -12,7 +12,7 @@ function AnalyseAttendance() {
 
   useEffect(() => {
     const getattendance = async () => {
-      const url = 'http://localhost:5000/api/data/getsubjects';
+      const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getsubjects`;
       dispatch(
         loadingActions.setLoading({ loading: true, msg: 'Loading Attendance' })
       );

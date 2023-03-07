@@ -17,13 +17,16 @@ function SideSignup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = credentials;
-    const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email: email, password: password, type: type }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/auth/createuser`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password, type: type }),
+      }
+    );
 
     response.status === 200
       ? dispatch(

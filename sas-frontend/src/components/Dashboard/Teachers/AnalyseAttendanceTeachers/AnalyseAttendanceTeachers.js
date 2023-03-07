@@ -28,7 +28,7 @@ function AnalyseAttendanceTeachers() {
   const dispatch = useDispatch();
 
   useEffect(async () => {
-    const url = 'http://localhost:5000/api/data/getteaches';
+    const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getteaches`;
     dispatch(loadingActions.setLoading({ loading: true, msg: 'Loading...' }));
     const temp = await axios.post(url).catch((err) => alert(err));
     setTeaches(temp.data);

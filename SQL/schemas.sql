@@ -45,7 +45,7 @@ CREATE TABLE takes (
 CREATE TABLE subject (
     subject_name VARCHAR(50) NOT NULL,
     subject_code VARCHAR(10) NOT NULL,
-    subject_type VARCHAR(10) NOT NULL
+    subject_type VARCHAR(10)
 );
 
 CREATE TABLE attendance (

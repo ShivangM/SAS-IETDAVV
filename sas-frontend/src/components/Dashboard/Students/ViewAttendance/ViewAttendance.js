@@ -10,7 +10,7 @@ function ViewAttendance() {
 
   useEffect(() => {
     const getattendance = async () => {
-      const url = 'http://localhost:5000/api/data/getattendance';
+      const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/data/getattendance`;
       dispatch(
         loadingActions.setLoading({ loading: true, msg: 'Loading Attendance' })
       );

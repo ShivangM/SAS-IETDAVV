@@ -26,7 +26,7 @@ function Dashboard() {
   useEffect(() => {
     if (localStorage.getItem('token')) {
       const getUser = async () => {
-        const url = 'http://localhost:5000/api/auth/getuser';
+        const url = `${process.env.REACT_APP_BACKEND_ENDPOINT}/api/auth/getuser`;
         const userData = await axios
           .post(url, { type: type })
           .catch((err) => alert(err));
